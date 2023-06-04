@@ -87,7 +87,7 @@ Overall, Oh My Zsh enhances the Zsh shell experience by providing an easy-to-use
 
 ### Install ohmyzsh
 
-https://ohmyz.sh/#install
+OhMyZsh can be install [here](https://ohmyz.sh/#install)
 
 ```shell
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
