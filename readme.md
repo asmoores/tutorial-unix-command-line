@@ -21,7 +21,7 @@ Each shell has its own set of features, syntax, and capabilities, but they all s
 Use the echo command:
 
 ```shell
-$ echo $SHELL
+echo $SHELL
 ```
 
 Output:
@@ -33,10 +33,10 @@ Output:
 Use the ps command:
 
 ```shell
-$ ps -p $$
+ps -p $$
 ```
 
-Output
+Output:
 
 ```shell
   PID TTY           TIME CMD
