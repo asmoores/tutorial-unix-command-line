@@ -18,13 +18,27 @@ Each shell has its own set of features, syntax, and capabilities, but they all s
 
 ## Find out which shell you are using
 
+Use the echo command:
+
 ```shell
 $ echo $SHELL
+```
+
+Output:
+
+```
 /bin/zsh
 ```
 
+Use the ps command:
+
 ```shell
 $ ps -p $$
+```
+
+Output
+
+```shell
   PID TTY           TIME CMD
 18682 ttys003    0:00.47 /bin/zsh -il
 ```
