@@ -1,6 +1,6 @@
 # Linux Command Line Tutorial
 
-## Explain what a shell is
+## What is a shell?
 
 A Unix shell is a command-line interface (CLI) or a text-based user interface (TUI) used in Unix-like operating systems. It provides a way for users to interact with the operating system by entering commands and receiving output. The shell acts as an intermediary between the user and the operating system, interpreting and executing commands.
 
@@ -29,7 +29,7 @@ $ ps -p $$
 18682 ttys003    0:00.47 /bin/zsh -il
 ```
 
-## Use zsh
+## What is zsh?
 
 Zsh, short for Z Shell, is an extended version of the Bourne Shell (sh) and is one of the most popular Unix shells available today. It was developed by Paul Falstad in 1990 and is designed to be an interactive and scripting shell with powerful features and customization options.
 
@@ -72,6 +72,12 @@ Here are the key aspects of Oh My Zsh:
 Overall, Oh My Zsh enhances the Zsh shell experience by providing an easy-to-use framework for customization, extending functionality through plugins, and offering a visually appealing prompt with a wide range of themes. It has gained popularity among Zsh users for its simplicity, extensive community support, and the ability to tailor the shell to individual preferences and workflows.
 
 ### Install ohmyzsh
+
+https://ohmyz.sh/#install
+
+```shell
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
 ## Package Manager
 
