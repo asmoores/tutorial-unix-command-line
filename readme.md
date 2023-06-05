@@ -181,28 +181,376 @@ You can then begin using Homebrew to install packages by running commands like `
 
 ## Setting up the terminal
 
-### Explain dot files
+### Dot files
 
-Figure out which init file the shell is using
+Dot files, also known as "hidden files," are files on Unix-like systems (including macOS and Linux) that have filenames starting with a dot (e.g., `.bashrc`, `.gitignore`). The dot prefix makes them hidden by default in file browsers and directory listings.
 
-Enable history and searching
+Dot files serve various purposes, including configuration, customization, and storing preferences for applications and the user's environment. Here are some common examples:
 
-Edit .profile
+1. Shell Configuration: Dot files like `.bashrc`, `.zshrc`, or `.bash_profile` contain shell configuration settings. These files define environment variables, aliases, functions, and other customizations for the shell.
 
-    Add an alias
-    Add a function
+2. Text Editor Configuration: Text editors such as Vim and Emacs often use dot files like `.vimrc`, `.emacs`, or `.emacs.d/init.el` to store customization options, keybindings, and plugins.
 
-## man
+3. Version Control: Version control systems like Git use dot files such as `.gitignore` to specify files or patterns to ignore when tracking changes in a repository.
+
+4. Application Configuration: Some applications utilize dot files to store configuration settings. For instance, the MySQL database server uses `.my.cnf` to store login credentials and other configuration options.
+
+5. Window Managers: Window managers and desktop environments may use dot files like `.xinitrc` or `.xprofile` to define startup commands, screen resolution settings, or desktop session configurations.
+
+Dot files are typically located in the user's home directory (`~`). By default, these files are hidden from regular directory listings, but you can reveal them by using the `-a` option with the `ls` command (e.g., `ls -a`).
+
+Editing or managing dot files can be done with any text editor or command-line tools. For example, you can edit `.bashrc` using a text editor like Vim, Nano, or a simple command-line editor like `nano ~/.bashrc`.
+
+Dot files play a crucial role in customizing and configuring various aspects of a Unix-like system, allowing users to personalize their environment, define application settings, and streamline their workflows.
+
+### What dot files are being used?
+
+When logging into a Unix-like system, the specific dot files that are executed can vary depending on the shell and system configuration. Here are a few common dot files that may be run during the login process:
+
+1. Shell Initialization Files:
+
+   - Bash Shell: `.bash_profile`, `.bash_login`, `.profile`
+   - Zsh Shell: `.zshrc`, `.zprofile`, `.zlogin`, `.zshlogin`
+   - Other Shells: `.profile`
+
+2. Environment Files:
+
+   - Environment variables can be set in files like `.bashrc`, `.bash_profile`, `.profile`, `.zshrc`, etc.
+
+3. Display Managers:
+
+   - If you log in via a display manager (e.g., GDM, LightDM), it may execute certain dot files specific to the desktop environment, such as `.xprofile`.
+
+4. Session Managers:
+   - Some desktop environments use session managers (e.g., GNOME's `gnome-session`) that may execute additional dot files or scripts to set up the session environment.
+
+To determine which dot files are being run during the login process, you can follow these steps:
+
+1. Open a terminal on your Unix-like system.
+
+2. Run the appropriate command to identify the shell you are using:
+
+   - For Bash: `echo $SHELL`
+   - For Zsh: `echo $ZSH_NAME`
+   - For other shells: Consult the documentation or use a similar command specific to your shell.
+
+3. Based on the output of the command in step 2, identify the shell initialization files associated with your shell.
+
+4. Open each identified file using a text editor (e.g., `nano`, `vim`) to view its contents. Look for any commands or references to other dot files that are sourced or executed during the login process.
+
+Note that the precise order and files executed can depend on the specific shell, operating system, and user configuration. Also, different shells have different conventions and priorities for the initialization files they execute.
+
+By examining the shell's documentation and inspecting the relevant dot files, you can gain insight into which dot files are executed when logging into your Unix-like system.
+
+### Customise dot files
+
+#### Aliases
+
+In Linux, an alias is a user-defined shortcut or alternate name for a command or series of commands. It allows you to create a new name for an existing command or define a sequence of commands that can be executed by typing a shorter, more memorable alias instead of the complete command.
+
+Aliases can be helpful for saving time and reducing the need to type long or complex commands frequently. They can also be used to customize and personalize your command-line experience. Here are a few key points about Linux aliases:
+
+1. Syntax: An alias is typically defined in the shell's configuration file (e.g., `.bashrc`, `.zshrc`) or in a separate file that is sourced by the shell. The general syntax for creating an alias is as follows:
+
+   ```shell
+   alias alias_name='command'
+   ```
+
+2. Command Substitution: The `command` part of the alias can be a single command or a sequence of commands enclosed in quotes. You can use command substitution (using backticks or `$(...)`) within the alias definition to include dynamic values or execute complex commands.
+
+3. Persistency: Aliases are usually defined in the shell's configuration file to ensure that they are available every time you start a new shell session. Changes to the configuration file require a shell restart or reloading the file to take effect.
+
+4. Overriding: If you define an alias that has the same name as an existing command, the alias will take precedence when you use that name in the shell. However, the original command can still be accessed by specifying its full path or using a backslash (`\`) before the command name.
+
+5. Listing Aliases: To list all defined aliases in your current shell session, you can use the `alias` command without any arguments. It will display a list of defined aliases and their corresponding commands.
+
+Here's an example that demonstrates how to create an alias:
+
+```shell
+alias ll='ls -alh'
+```
+
+In this example, the alias `ll` is created for the `ls -alh` command. Now, whenever you type `ll` in the terminal, it will execute the equivalent `ls -alh` command.
+
+It's important to note that aliases are specific to the shell you are using (e.g., Bash, Zsh). Different shells may have slightly different syntax or behavior for defining and using aliases.
+
+Overall, aliases are a convenient way to create shortcuts and streamline your command-line experience in Linux. They allow you to define custom commands or simplify the usage of existing commands by assigning them a shorter, more memorable name.
+
+#### Functions
+
+In Linux, a function is a named block of code that performs a specific task or set of tasks. Functions allow you to group a series of commands together, provide parameters for customization, and enable code reuse. They are commonly used in shell scripts but can also be defined and used directly in an interactive shell session. Here are some key points about Linux functions:
+
+1. Function Definition: A function is defined using the following syntax:
+
+   ```shell
+   function_name() {
+       # commands
+   }
+   ```
+
+   You can also use the `function` keyword before the function name, but it is optional in most modern shells.
+
+2. Parameters: Functions can accept parameters (arguments) that provide data or values to the function. Parameters are accessed within the function using special variables, such as `$1`, `$2`, and so on, representing the first, second, and subsequent parameters, respectively.
+
+3. Local Variables: Functions can define local variables that are only accessible within the function's scope. Local variables are declared using the `local` keyword before the variable name.
+
+4. Return Value: Functions can return a value using the `return` statement. The returned value can be accessed using the special variable `$?` after the function call.
+
+5. Function Invocation: To execute a function, you simply call it by name, followed by any necessary arguments. For example:
+
+   ```shell
+   function_name argument1 argument2
+   ```
+
+6. Code Reusability: Functions provide a way to encapsulate a set of commands into a single unit, allowing for code reuse and modularity. Instead of duplicating code, you can call a function whenever you need to perform a specific task.
+
+Here's an example that demonstrates how to define and use a function in a shell script:
+
+```shell
+# Function definition
+print_greeting() {
+    local name=$1
+    echo "Hello, $name!"
+}
+
+# Function invocation
+print_greeting "John"
+```
+
+In this example, the `print_greeting` function is defined with a single parameter `name`. It prints a greeting message with the provided name. The function is then invoked with the argument `"John"`, resulting in the output: "Hello, John!"
+
+Functions are particularly useful in shell scripting to modularize code, improve readability, and enable code reuse. They allow you to define custom actions or operations and execute them with different arguments or in various parts of your script.
+
+## Useful builtin commands
+
+### man
+
+The `man` command in Linux and Unix-like systems is used to display the manual pages (or man pages) for various commands, system calls, library functions, and configuration files. The manual pages provide detailed documentation and instructions on how to use and understand various aspects of the system.
+
+Here are some key points about the `man` command:
+
+1. Command Syntax: The basic syntax for using the `man` command is as follows:
+
+   ```shell
+   man [section] command_name
+   ```
+
+   - `section` refers to the specific section of the manual to search in. If not specified, `man` will display the first available manual page it finds for the command.
+   - `command_name` is the name of the command or topic you want to search for in the manual.
+
+2. Manual Sections: The manual is divided into several numbered sections, each covering a specific topic. The most common sections are:
+
+   - Section 1: Executable programs or commands.
+   - Section 2: System calls (functions provided by the kernel).
+   - Section 3: Library functions (functions provided by libraries).
+   - Section 4: Special files (devices and drivers).
+   - Section 5: File formats and conventions.
+   - Section 6: Games.
+   - Section 7: Miscellaneous (including macro packages and conventions).
+   - Section 8: System administration commands.
+
+3. Navigating the Manual Pages: Once you open a manual page using `man`, you can navigate through it using keyboard commands. Common navigation commands include:
+
+   - Arrow keys or Page Up/Page Down: Scroll through the manual page.
+   - Home/End: Go to the beginning or end of the page.
+   - /pattern: Search for a specific pattern within the manual page.
+   - q: Quit and exit the manual viewer.
+
+4. Multiple Matches: If multiple manual pages match your search term, you can navigate through the available options using the `n` (next) and `p` (previous) commands.
+
+5. Supplementary Information: Some manual pages provide additional information in the "SEE ALSO" section, which lists related commands or topics that you may find useful.
+
+The `man` command is a valuable resource for learning about commands, understanding their usage, and exploring system documentation. By using `man`, you can access comprehensive and detailed information about various aspects of the Linux or Unix-like system, helping you become more proficient in using the available tools and understanding their functionalities.
 
 ## echo
 
+The `echo` command is a built-in command in most Unix-like shells, including Bash and Zsh. It is used to display text or variables on the terminal. The `echo` command takes the following general form:
+
+```shell
+echo [option(s)] [string(s)]
+```
+
+Here are some key points about the `echo` command:
+
+- **Displaying Text**: The primary purpose of `echo` is to display text on the terminal. For example:
+
+  ```shell
+  echo Hello, World!
+  ```
+
+  This will output "Hello, World!" on the terminal.
+
+- **Escaping Characters**: The `echo` command interprets some special characters in the provided string. For example:
+
+  - `\n` represents a newline character.
+  - `\t` represents a tab character.
+  - `\\` represents a backslash.
+  - `\"` represents a double quote.
+
+- **Expanding Variables**: You can also use `echo` to display the values of variables. When you place a variable within double quotes, its value will be expanded and displayed. For example:
+
+  ```shell
+  name="John"
+  echo "My name is $name"
+  ```
+
+  This will output "My name is John" on the terminal.
+
+- **Options**: The `echo` command supports various options to modify its behavior. Some commonly used options include:
+
+  - `-n`: Suppresses the trailing newline character, allowing you to print text without a line break.
+  - `-e`: Enables the interpretation of escape sequences, such as `\n` and `\t`.
+  - `-E`: Disables the interpretation of escape sequences.
+
+- **Multiple Arguments**: You can pass multiple strings to the `echo` command, separated by spaces. The command will display each string, separated by spaces. For example:
+  ```shell
+  echo Hello, World! Have a nice day.
+  ```
+  This will output "Hello, World! Have a nice day." on the terminal.
+
+The `echo` command is often used in shell scripts for displaying messages, generating output, or providing information to the user. It is a simple yet useful built-in command for printing text and values on the terminal.
+
 ## eval
+
+The `eval` command is a built-in command in most Unix-like shells, including Bash and Zsh. It is used to evaluate and execute a command that is constructed dynamically or stored as a string. The `eval` command takes the following general form:
+
+```shell
+eval [option(s)] [command_string]
+```
+
+Here are some key points about the `eval` command:
+
+- **Dynamic Command Execution**: The primary purpose of `eval` is to evaluate and execute a command that is constructed dynamically or stored as a string. This allows you to build and execute commands programmatically at runtime. For example:
+
+  ```shell
+  command="ls -l"
+  eval $command
+  ```
+
+  This will execute the command `ls -l`, which is stored in the variable `command`.
+
+- **Expanding Variables**: When a command string is passed to `eval`, it undergoes variable expansion. This means that any variables within the command string will be expanded and their values will be used during command execution. For example:
+
+  ```shell
+  dir="Documents"
+  eval ls $dir
+  ```
+
+  This will execute the command `ls Documents`, where the variable `$dir` is expanded to its value (`Documents`).
+
+- **Evaluating Expressions**: The `eval` command can also evaluate arithmetic expressions. When an arithmetic expression is passed to `eval`, it is evaluated and the result is returned. For example:
+
+  ```shell
+  expression="2 + 3 * 4"
+  eval echo $(( $expression ))
+  ```
+
+  This will evaluate the expression `2 + 3 * 4`, which equals 14, and the result will be displayed as output.
+
+- **Command Substitution**: The `eval` command can also be used with command substitution, denoted by `$()` or backticks. Command substitution allows you to capture the output of a command and use it as part of another command. For example:
+  ```shell
+  result=$(ls)
+  eval echo $result
+  ```
+  This will execute the `ls` command, capture its output, store it in the variable `result`, and then display the contents of `result` using `eval`.
+
+It's important to note that the `eval` command can be powerful but also potentially dangerous if used incorrectly or with untrusted input. Care should be taken to ensure that the evaluated command string is secure and properly constructed to avoid unintended consequences or security vulnerabilities.
+
+The `eval` command is often used in advanced shell scripting scenarios where command construction or dynamic evaluation is required. It allows you to build and execute commands at runtime, expanding variables and evaluating expressions as needed.
 
 ## env
 
+The `env` command is a built-in command in most Unix-like shells, including Bash and Zsh. It is used to display or modify the environment variables within the current shell session or to execute a command in a modified environment. The `env` command takes the following general form:
+
+```shell
+env [option(s)] [name=value ...] [command]
+```
+
+Here are some key points about the `env` command:
+
+- **Displaying Environment Variables**: When used without any options or arguments, the `env` command displays the current environment variables. It provides a list of variable names and their corresponding values.
+
+- **Modifying Environment Variables**: The `env` command can be used to modify the environment variables within the current shell session. You can specify new values for existing variables or define new variables using the `name=value` syntax. For example:
+
+  ```shell
+  env VAR=value command
+  ```
+
+  This sets the value of the environment variable `VAR` to "value" and then executes the specified `command` in the modified environment.
+
+- **Executing Commands in a Modified Environment**: By providing a command as an argument to the `env` command, you can execute that command within a modified environment. This allows you to override or add environment variables specifically for that command. For example:
+
+  ```shell
+  env VAR=value command
+  ```
+
+  This executes `command` with the environment variable `VAR` set to "value" while keeping the rest of the environment variables intact.
+
+- **Options**: The `env` command supports various options to modify its behavior. Some commonly used options include:
+  - `-i`: Clear all environment variables and start with a clean environment.
+  - `-u variable`: Unset (remove) the specified variable from the environment.
+  - `-S separator`: Specify a custom separator character for variable assignments.
+
+The `env` command is often used in shell scripting to control the environment variables for a specific command or to create clean environments for executing commands. It provides flexibility in managing the environment within a shell session and allows you to modify or override specific variables as needed.
+
 ## history
 
+The `history` command is a built-in command in most Unix-like shells, including Bash and Zsh. It is used to display or manipulate the command history, which is a record of previously executed commands in the current shell session. The `history` command takes the following general form:
+
+```shell
+history [option(s)]
+```
+
+Here are some key points about the `history` command:
+
+- **Displaying Command History**: When used without any options, the `history` command displays a numbered list of previously executed commands. By default, it shows the most recent commands at the bottom of the list. Each command is assigned a unique number, starting from 1.
+
+- **Limiting the Displayed History**: You can use the `-n` option followed by a number to limit the number of commands displayed. For example, `history -n 10` displays the last 10 commands in the history.
+
+- **Executing Previous Commands**: To execute a command from the history, you can use the `!` (exclamation mark) followed by the command number. For example, `!5` executes the command with number 5 from the history.
+
+- **Searching the History**: You can search the history for a specific command using the `Ctrl+R` keyboard shortcut. This opens an interactive search prompt where you can type a portion of the command and press `Enter` to execute the matching command.
+
+- **Options**: The `history` command supports various options to modify its behavior. Some commonly used options include:
+
+  - `-c`: Clear the command history, removing all previously executed commands.
+  - `-w`: Write the current command history to the history file specified by the `HISTFILE` environment variable. This ensures that the history is preserved across shell sessions.
+  - `-a`: Append the current session's command history to the history file without overwriting it.
+
+- **Customizing History Settings**: The behavior of the `history` command can be customized by modifying the shell's history-related variables. For example, you can control the maximum number of commands to keep in the history (`HISTSIZE`), configure the history file location (`HISTFILE`), or ignore certain commands from being recorded (`HISTIGNORE`).
+
+The `history` command is useful for recalling previously executed commands, reusing or modifying them, and reviewing the command history for troubleshooting or auditing purposes. It provides an efficient way to navigate and manage your command history within a shell session.
+
 ## sudo
+
+The `sudo` command is a built-in command in most Unix-like systems, including Linux and macOS. It stands for "Superuser Do" and is used to execute a command with elevated privileges or as another user, typically the root user.
+
+Here are some key points about the `sudo` command:
+
+- **Elevated Privileges**: The primary purpose of `sudo` is to execute a command with elevated privileges. By default, this means running the command as the root user, which has administrative privileges. This allows authorized users to perform administrative tasks or execute commands that require higher permissions.
+
+- **Authorization**: Before executing a command with `sudo`, the user is typically prompted to enter their own password. Once authenticated, `sudo` checks the user's privileges and the command's configuration to determine whether the user is allowed to execute the command with elevated privileges.
+
+- **Command Syntax**: The general syntax for using `sudo` is as follows:
+
+  ```shell
+  sudo [option(s)] command [arguments]
+  ```
+
+  - `command` is the command you want to execute with elevated privileges.
+  - `arguments` are any additional parameters or arguments required by the command.
+
+- **Options**: The `sudo` command supports various options to modify its behavior. Some commonly used options include:
+
+  - `-u user`: Execute the command as the specified user instead of the root user.
+  - `-i`: Run the command in a new shell with the environment variables of the target user.
+  - `-s`: Run the command in a shell with elevated privileges or as another user.
+
+- **Configuration**: The behavior of `sudo` can be configured through the `sudoers` file, which is typically located at `/etc/sudoers`. The file defines who is allowed to use `sudo`, which commands they can execute, and any additional restrictions or options.
+
+- **Security Considerations**: It's important to use `sudo` with caution to prevent unauthorized or malicious use. Only authorized users should be granted `sudo` privileges, and the commands executed with `sudo` should be verified and trusted to avoid potential security risks.
+
+The `sudo` command is widely used to perform administrative tasks, manage system configurations, install software, and execute commands that require elevated privileges. It allows authorized users to temporarily act as superusers or other privileged users, providing a secure and controlled way to perform administrative operations on Unix-like systems.
 
 ## ls
 
