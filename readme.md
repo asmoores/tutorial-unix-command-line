@@ -145,6 +145,40 @@ Overall, Homebrew simplifies the process of managing software packages on macOS 
 
 ### Install homebrew
 
+To install Homebrew on macOS, you can follow these steps:
+
+1. Open a terminal application on your macOS system. You can find the terminal under the "Utilities" folder within the "Applications" directory.
+
+2. In the terminal, paste the following command and press Enter:
+
+   ```shell
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+
+   This command will initiate the installation process by downloading and executing the Homebrew installation script.
+
+3. The installation script will prompt you to enter your password. Type your macOS user password and press Enter. Note that your password will not be visible as you type.
+
+4. Wait for the installation to complete. The script will automatically download and install Homebrew on your system.
+
+Once the installation is finished, you can start using Homebrew to install and manage software packages on your macOS system.
+
+To verify that Homebrew is correctly installed, you can run the following command in the terminal:
+
+```shell
+brew --version
+```
+
+If Homebrew is installed properly, this command will display the version number of Homebrew installed on your system.
+
+You can then begin using Homebrew to install packages by running commands like `brew install package_name`, where "package_name" represents the name of the package you want to install.
+
+### Useful packages to start with
+
+- brew install gnupg
+- brew install httpie
+- brew install jq
+
 ## Setting up the terminal
 
 ### Explain dot files
