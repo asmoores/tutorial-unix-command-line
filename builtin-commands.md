@@ -73,6 +73,184 @@ Here are some key points about the `which` command:
 
 The `which` command is commonly used to determine the location of executable files in the system. It can be helpful for troubleshooting issues related to command execution, verifying the availability of specific commands, and understanding the precedence of commands in the `PATH`.
 
+### help
+
+The `help` command is a built-in command in most Unix-like shells, including Bash and Zsh. It provides help information about shell builtin commands.
+
+```shell
+help [command]
+```
+
+Key features:
+
+- **List All Builtins**: Running `help` without arguments lists all available builtin commands
+- **Specific Help**: `help cd` shows detailed help for the `cd` command
+- **Shell-Specific**: Only works for builtin commands, not external programs
+- **Quick Reference**: Faster than man pages for builtin commands
+
+Example:
+```shell
+help           # List all builtin commands
+help type      # Get help on the 'type' builtin
+```
+
+### type
+
+The `type` command is a built-in command that determines how a command name would be interpreted by the shell.
+
+```shell
+type [options] command_name
+```
+
+Features:
+
+- **Command Classification**: Shows if command is builtin, alias, function, or external
+- **Path Resolution**: Displays the full path for external commands
+- **Options**:
+  - `-a`: Show all locations containing command
+  - `-t`: Show only the type (alias, builtin, file, function)
+  - `-p`: Show path for external commands only
+
+Examples:
+```shell
+type ls        # Shows: ls is aliased to `ls --color=auto`
+type cd        # Shows: cd is a shell builtin
+type -t grep   # Shows: file
+```
+
+### command
+
+The `command` builtin runs a command bypassing shell functions and aliases.
+
+```shell
+command [-pVv] command_name [arguments]
+```
+
+Options:
+
+- **-p**: Use default PATH, ignoring current PATH
+- **-V**: Verbose description of command (like `type`)
+- **-v**: Display path of command (like `which`)
+
+Use cases:
+
+- **Bypass Aliases**: `command ls` runs actual `ls`, not alias
+- **Bypass Functions**: Ensures you run the real command
+- **Path Testing**: `command -v git` checks if git is available
+
+### hash
+
+The `hash` command manages the shell's internal hash table of command locations.
+
+```shell
+hash [options] [command]
+```
+
+Features:
+
+- **Display Hash Table**: `hash` shows cached command locations
+- **Clear Cache**: `hash -r` clears the entire hash table
+- **Remove Entry**: `hash -d command` removes specific command from cache
+- **Add Entry**: `hash command` adds/updates command in cache
+
+Useful for:
+
+- Understanding command lookup performance
+- Forcing re-lookup of moved commands
+- Debugging PATH issues
+
+### apropos
+
+The `apropos` command searches manual page names and descriptions for keywords.
+
+```shell
+apropos [options] keyword
+```
+
+Features:
+
+- **Keyword Search**: Finds commands related to a topic
+- **Description Search**: Searches both command names and descriptions
+- **Multiple Keywords**: Can search for multiple terms
+
+Options:
+
+- `-a`: All keywords must match (AND logic)
+- `-e`: Exact match only
+- `-r`: Use regular expressions
+
+Example:
+```shell
+apropos network    # Find all commands related to networking
+apropos "copy file" # Find commands for copying files
+```
+
+### whatis
+
+The `whatis` command displays brief descriptions of commands from manual pages.
+
+```shell
+whatis command_name
+```
+
+Features:
+
+- **One-Line Descriptions**: Shows concise command summaries
+- **Quick Lookup**: Faster than reading full man pages
+- **Multiple Commands**: Can query multiple commands at once
+
+Example:
+```shell
+whatis ls cp mv    # Get brief descriptions of ls, cp, and mv
+```
+
+### info
+
+The `info` command displays GNU Info documents, which often provide more detailed documentation than man pages.
+
+```shell
+info [options] [topic]
+```
+
+Features:
+
+- **Hypertext Navigation**: Links between related topics
+- **Detailed Documentation**: Often more comprehensive than man pages
+- **GNU Focus**: Primarily for GNU tools and programs
+
+Navigation:
+
+- **n**: Next node
+- **p**: Previous node
+- **u**: Up one level
+- **q**: Quit
+- **Tab**: Move to next link
+
+### --help Option
+
+Most Unix/Linux commands support the `--help` or `-h` option for quick inline help.
+
+```shell
+command --help
+command -h
+```
+
+Features:
+
+- **Quick Reference**: Immediate help without opening separate viewer
+- **Usage Examples**: Often includes common usage patterns
+- **Option Summary**: Lists all available command options
+- **Universal**: Works with most external commands
+
+Examples:
+```shell
+ls --help          # Quick help for ls command
+grep --help        # Show grep options and usage
+tar --help         # Display tar command help
+```
+
+Tip: When `--help` doesn't work, try `-h`, and if neither works, use `man command`.
+
 ## Text Output and Display
 
 ### echo
