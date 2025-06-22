@@ -1,4 +1,4 @@
-# Setting up the terminal
+# 3. Terminal Setup
 
 ## Dot files
 
