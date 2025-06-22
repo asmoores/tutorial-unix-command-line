@@ -1,4 +1,4 @@
-# What is a shell?
+# Shell Overview and Setup
 
 A Unix shell is a command-line interface (CLI) or a text-based user interface (TUI) used in Unix-like operating systems. It provides a way for users to interact with the operating system by entering commands and receiving output. The shell acts as an intermediary between the user and the operating system, interpreting and executing commands.
 
